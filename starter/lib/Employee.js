@@ -22,5 +22,5 @@ class Employee {
         return "Employee";
     }
 }
-Why are ther no
+
 module.exports = Employee;

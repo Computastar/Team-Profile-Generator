@@ -12,10 +12,12 @@
   },
   "author": "Jason Hunter",
   "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  },
   "dependencies": {
     "enquirer": "^2.3.6",
-    "inquirer": "^6.5.0",
-    "jest": "^27.5.1"
+    "inquirer": "^6.5.0"
   },
   "bugs": {
     "url": "https://github.com/Computastar/Team-Profile-Generator/issues"

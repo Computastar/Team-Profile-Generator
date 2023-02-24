@@ -15,8 +15,26 @@ const roles = require('./lib/role.json');
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 /*-- Global Variables --*/
-const employee = [];
+const employees = [];
 
+
+/*-- function to create another employee or create the HTML and quit --*/
+const anotherEmployeeOrCreateHTML = async() => {
+
+    const anotherEmployee = await inquirer.prompt([
+        {
+          type: "confirm",
+          message: `Do you want to add another Employee or create the document?:`,
+          name: "again",
+        },
+      ]);
+    if(anotherEmployee.again) {
+        getRole();
+    } else {
+        //writeDoc('./dist/index.html', employees)
+        console.log("lets do it again")
+    }
+};
 
 /*-- function creat new instance and add to employees array --*/
 const generateEmployee = (employee,response) => {
@@ -37,7 +55,7 @@ const generateEmployee = (employee,response) => {
       default:
         break;
     }
-createAnotherOrFinish();
+    anotherEmployeeOrCreateHTML();
 }
 
 
@@ -115,7 +133,7 @@ const getUserInput = employee => {
     /*-- Call generateEmployee with params employee, response --*/
     inquirer.prompt(Qs).then((response) => {
         console.log(employee, response)
-       // generateEmployee(employee,response)
+        generateEmployee(employee,response)
     });
 };
 

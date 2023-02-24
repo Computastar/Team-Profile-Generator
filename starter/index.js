@@ -17,6 +17,30 @@ const roles = require('./lib/role.json');
 /*-- Global Variables --*/
 const employee = [];
 
+
+/*-- function creat new instance and add to employees array --*/
+const generateEmployee = (employee,response) => {
+
+    switch (employee) {
+      case "manager":
+        const manager = new Manager(response);
+        employees.push(manager);
+        break;
+      case "engineer":
+        const engineer = new Engineer(response);
+        employees.push(engineer);
+        break;
+      case "intern":
+        const intern = new Employee(response);
+        employees.push(intern);
+        break;
+      default:
+        break;
+    }
+createAnotherOrFinish();
+}
+
+
 /* function to prompt for role or quit */
 const getRole = async() => {
 
@@ -43,8 +67,57 @@ if (getRole.role === "End Program")
 {
     return
 }
-//askAndCreate(getRole.role.toLowerCase());
+    getUserInput(getRole.role.toLowerCase());
 }
+
+const getUserInput = employee => {
+
+    //question array
+    const Qs = [
+        {
+            type: 'input',
+            message: `What is the ${employee}'s Name? `,
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: `What is their employee id? `,
+            name: 'id',
+            //validate: (id) => {return checkUnique(id)}
+        },
+        {
+            type: 'input',
+            message: `What is their Email Address? `,
+            name: 'email',
+            //validate: (email) => {return verifyEmail(email)}
+        },
+        {
+            type: 'input',
+            message: `What is their Office Number? `,
+            name: 'officeNumber',
+            when: () => {return employee === 'manager'}
+        },
+        {
+            type: 'input',
+            message: `What is their Github username? `,
+            name: 'github',
+            when: () => {return employee === 'engineer'},
+            //validate: (github) => {return checkUrlFriendly(github)}
+        },
+        {
+            type: 'input',
+            message: `What is their School Name? `,
+            name: 'school',
+            when: () => {return employee === 'intern'}
+        },
+    ];
+
+    /*-- Call generateEmployee with params employee, response --*/
+    inquirer.prompt(Qs).then((response) => {
+        console.log(employee, response)
+       // generateEmployee(employee,response)
+    });
+};
 
 
 /*-- Initiate program --*/

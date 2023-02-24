@@ -11,12 +11,22 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 
 const roles = require('./lib/role.json');
+const pageTemplate = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 /*-- Global Variables --*/
 const employees = [];
 
+
+/*-- Generate HMTL document and quit --*/
+const generateHTML = (fileName, data) => {
+    const text = pageTemplate(data);
+
+    fs.writeFile(fileName, text, (err) =>
+        err ? console.error(err) : console.log('\nHTML Generated!')
+    );
+};
 
 /*-- function to create another employee or create the HTML and quit --*/
 const anotherEmployeeOrCreateHTML = async() => {
@@ -31,7 +41,7 @@ const anotherEmployeeOrCreateHTML = async() => {
     if(anotherEmployee.again) {
         getRole();
     } else {
-        //writeDoc('./dist/index.html', employees)
+        generateHTML(outputPath, employees)
         console.log("lets do it again")
     }
 };
@@ -49,7 +59,7 @@ const generateEmployee = (employee,response) => {
         employees.push(engineer);
         break;
       case "intern":
-        const intern = new Employee(response);
+        const intern = new Intern(response);
         employees.push(intern);
         break;
       default:

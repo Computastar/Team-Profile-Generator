@@ -1,0 +1,24 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "Creates an HTLM page of team members",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Computastar/Team-Profile-Generator.git"
+  },
+  "author": "Jason Hunter",
+  "license": "ISC",
+  "dependencies": {
+    "enquirer": "^2.3.6",
+    "inquirer": "^6.5.0",
+    "jest": "^27.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Computastar/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/Computastar/Team-Profile-Generator#readme"
+}

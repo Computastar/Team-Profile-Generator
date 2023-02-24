@@ -1,0 +1,14 @@
+{
+    "roles": [
+        {
+            "role": "Manager"
+        },
+        {
+            "role": "Engineer"
+        },
+        {
+            "role": "Intern"
+        }
+
+    ]
+}

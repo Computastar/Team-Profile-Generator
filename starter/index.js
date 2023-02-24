@@ -10,6 +10,11 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
+const roles = require('./lib/role.json');
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+
+/*-- Global Variables --*/
+const employee = [];
+
 

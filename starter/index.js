@@ -8,10 +8,9 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+const roles = require('./lib/role.json');
 const render = require("./src/page-template.js");
 
-const roles = require('./lib/role.json');
-const pageTemplate = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
@@ -21,10 +20,15 @@ const employees = [];
 
 /*-- Generate HMTL document and quit --*/
 const generateHTML = (fileName, data) => {
-    const text = pageTemplate(data);
+    const text = render(data);
+
+    if (!fs.existsSync(OUTPUT_DIR))
+    {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
 
     fs.writeFile(fileName, text, (err) =>
-        err ? console.error(err) : console.log('\nHTML Generated!')
+        err ? console.error(err) : console.log(`\n The generated page can be found at ${outputPath}`)
     );
 };
 
@@ -42,7 +46,6 @@ const anotherEmployeeOrCreateHTML = async() => {
         getRole();
     } else {
         generateHTML(outputPath, employees)
-        console.log("lets do it again")
     }
 };
 

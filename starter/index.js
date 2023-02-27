@@ -145,7 +145,7 @@ const getUserInput = employee => {
 
     /*-- Call generateEmployee with params employee, response --*/
     inquirer.prompt(Qs).then((response) => {
-        console.log(employee, response)
+        //console.log(employee, response)
         generateEmployee(employee,response)
     });
 };

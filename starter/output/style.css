@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+:root {
+    --manager-card: #D66853;
+    --engineer-card: #5762D5;
+    --intern-card: #FAA916;
+    text-transform: capitalize;
+}
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+    color: #FBFBFF;;
+}
+
+.jumbotron {
+    background: linear-gradient(to Right, rgb(156, 188, 248), rgb(4, 4, 94));
+    /*background-color: #5762D5;*/
+}
+
+.employees {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    box-shadow: 0 .2rem .4rem rgba(0,0,0,0.16), 
+                0 .2rem .4rem rgba(0,0,0,0.23);
+    border-radius: .25rem;
+    overflow: hidden;
+    background-color: #FBFBFF;
+    min-width: 15rem;
+    max-width: 20rem;
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.employee-head {
+    padding: 1.5rem 1rem;
+    color: #fff;
+}
+
+.manager {
+    background-color: var(--manager-card);
+}
+
+.engineer {
+    background-color: var(--engineer-card);
+}
+
+.intern {
+    background-color: var(--intern-card);
+}
+
+.name {
+    margin: 0;
+}
+
+.position {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.employee-body {
+    padding: 1rem;
+}
+
+.employee-body p {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        width: calc(50% - .5rem);
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .employees {
+        flex-direction: column;
+    }
+
+    .card {
+        width: auto;
+    }
+}

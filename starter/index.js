@@ -4,6 +4,9 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const axios = require("axios");
+const validator = require("node-email-validation");
+const phone = require('phone');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -17,6 +20,28 @@ const render = require("./src/page-template.js");
 /*-- Global Variables --*/
 const employees = [];
 
+
+
+
+const verifyGitHub = async github => {
+    console.log(github)
+    githubData = await axios.get(`https://api.github.com/users/${github}`)
+    // .catch(function (error) {
+       if (githubData.data.login.toLowerCase() !== github.toLowerCase()) {
+        //console.log("not found" + githubData.data.login)
+       return 'We cant find that github profile, please try again or press ctrl + c to quit.';
+       }
+      //console.log(githubData.data.name)
+     return true;
+    }
+//)}
+    
+const verifyEmail = async email => {
+    if (!validator.is_email_valid(email)) {
+        return 'Invalid email';
+    }
+    return true;
+    };
 
 /*-- Generate HMTL document and quit --*/
 const generateHTML = (fileName, data) => {
@@ -120,7 +145,7 @@ const getUserInput = employee => {
             type: 'input',
             message: `What is their Email Address? `,
             name: 'email',
-            //validate: (email) => {return verifyEmail(email)}
+            validate: (email) => {return verifyEmail(email)}
         },
         {
             type: 'input',
@@ -133,7 +158,7 @@ const getUserInput = employee => {
             message: `What is their Github username? `,
             name: 'github',
             when: () => {return employee === 'engineer'},
-            //validate: (github) => {return checkUrlFriendly(github)}
+            validate: (github) => {return verifyGitHub(github)}
         },
         {
             type: 'input',
@@ -155,6 +180,7 @@ const getUserInput = employee => {
 
 const init = () => {
     getRole();
+    
 }
 
 init();

@@ -182,7 +182,7 @@ const getUserInput = employee => {
             message: `What is their Github username? `,
             name: 'github',
             when: () => {return employee === 'engineer'},
-            validate: (github) => {return verifyGitHub(github)}
+            //validate: (github) => {return verifyGitHub(github)}
         },
         {
             type: 'input',

@@ -22,6 +22,7 @@
     "enquirer": "^2.3.6",
     "figlet": "^1.5.2",
     "inquirer": "^6.5.0",
+    "libphonenumber-js": "^1.10.21",
     "node-email-validation": "^1.0.4"
   },
   "bugs": {

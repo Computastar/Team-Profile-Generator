@@ -9,6 +9,8 @@ const validator = require("node-email-validation");
 const clear = require("clear");
 const chalk = require("chalk");
 const figlet = require("figlet");
+const isValidPhoneNumber = require("libphonenumber-js/core");
+const data = require("./metadata.custom.json");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -29,7 +31,7 @@ const setConsole = () => {
 }
 
 const verifyOfficeNumber = officeNumber => {
-    if (typeof officeNumber !== 'number'){
+    if (isValidPhoneNumber( officeNumber , "GB", data)){
         return 'Invalid Phone Number';
     }
     return true;
@@ -161,7 +163,7 @@ const getUserInput = employee => {
             message: `What is their Office Number? `,
             name: 'officeNumber',
             when: () => {return employee === 'manager'},
-            //validate: (officeNumber) => {return verifyOfficeNumber(officeNumber)}
+            validate: (officeNumber) => {return verifyOfficeNumber(officeNumber)}
         },
         {
             type: 'input',

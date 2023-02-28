@@ -23,7 +23,14 @@ const render = require("./src/page-template.js");
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 /*-- Global Variables --*/
-const employees = [];
+const employees = []; 
+let count = 0;
+
+const counter = () => {
+    //count = startNumber;
+    count++
+    return count
+}
 
 const setConsole = () => {
     clear();
@@ -32,18 +39,31 @@ const setConsole = () => {
 
 const verifyOfficeNumber = officeNumber => {
     if (isValidPhoneNumber( officeNumber , "GB", data)){
-        return 'Invalid Phone Number';
+        return true;
     }
-    return true;
+    return 'Invalid Phone Number';
 }
 
 const verifyGitHub = async github => {
-    githubData = await axios.get(`https://api.github.com/users/${github}`)
-       if (githubData.data.login.toLowerCase() !== github.toLowerCase()) {
+    await axios.get(`https://api.github.com/users/${github}`)
+          .then(response => {
+       if (response.status !== 200) {
+
        return `We cant find that github profile ${github}`;
-       }
+       }})
+       console.log(response.status)
      return true;
 }
+
+// async function verifyGitHub (github)
+//  {
+//     const githubData = await axios.get(`https://api.github.com/users/${github}`)
+//        if (githubData.status === 200) {
+//         return true;
+//        }
+//        return `We cant find that github profile ${github}`;
+
+// }
 
     
 const verifyEmail = async email => {
@@ -150,6 +170,7 @@ const getUserInput = employee => {
             type: 'input',
             message: `What is their employee id? `,
             name: 'id',
+            default: counter()
             //validate: (id) => {return checkUnique(id)}
         },
         {

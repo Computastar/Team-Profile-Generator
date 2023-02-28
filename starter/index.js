@@ -46,27 +46,18 @@ const verifyOfficeNumber = officeNumber => {
 
 const verifyGitHub = async github => {
     await axios.get(`https://api.github.com/users/${github}`)
-          .then(response => {
-       if (response.status !== 200) {
-
-       return `We cant find that github profile ${github}`;
-       }})
-       console.log(response.status)
-     return true;
+          .catch(function (error) {
+            if (error.response.data.message === 'Not Found'){
+            //console.log("Not Found")
+            return 'Invalid github';
+            }
+            //console.log("Oukka user")
+            return true;
+            })
 }
 
-// async function verifyGitHub (github)
-//  {
-//     const githubData = await axios.get(`https://api.github.com/users/${github}`)
-//        if (githubData.status === 200) {
-//         return true;
-//        }
-//        return `We cant find that github profile ${github}`;
-
-// }
-
     
-const verifyEmail = async email => {
+const verifyEmail = email => {
     if (!validator.is_email_valid(email)) {
         return 'Invalid email';
     }
@@ -214,6 +205,7 @@ const getUserInput = employee => {
 const init = () => {
     setConsole();
     getRole();
+    //verifyGitHub('buttfucker')
       
 }
 

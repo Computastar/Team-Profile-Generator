@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -10,7 +11,7 @@ const clear = require("clear");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const isValidPhoneNumber = require("libphonenumber-js/core");
-const data = require("./metadata.custom.json");
+const data = require("./lib/metadata.custom.json");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -205,7 +206,6 @@ const getUserInput = employee => {
 const init = () => {
     setConsole();
     getRole();
-    //verifyGitHub('buttfucker')
       
 }
 

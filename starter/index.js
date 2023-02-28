@@ -6,7 +6,9 @@ const path = require("path");
 const fs = require("fs");
 const axios = require("axios");
 const validator = require("node-email-validation");
-const phone = require('phone');
+const clear = require("clear");
+const chalk = require("chalk");
+const figlet = require("figlet");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -15,33 +17,39 @@ const roles = require('./lib/role.json');
 const render = require("./src/page-template.js");
 
 
+
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 /*-- Global Variables --*/
 const employees = [];
 
+const setConsole = () => {
+    clear();
+    console.log(chalk.yellowBright(figlet.textSync('Team Profile Generator', {horizontalLayout: "full"})));
+}
 
-
+const verifyOfficeNumber = officeNumber => {
+    if (typeof officeNumber !== 'number'){
+        return 'Invalid Phone Number';
+    }
+    return true;
+}
 
 const verifyGitHub = async github => {
-    console.log(github)
     githubData = await axios.get(`https://api.github.com/users/${github}`)
-    // .catch(function (error) {
        if (githubData.data.login.toLowerCase() !== github.toLowerCase()) {
-        //console.log("not found" + githubData.data.login)
-       return 'We cant find that github profile, please try again or press ctrl + c to quit.';
+       return `We cant find that github profile ${github}`;
        }
-      //console.log(githubData.data.name)
      return true;
-    }
-//)}
+}
+
     
 const verifyEmail = async email => {
     if (!validator.is_email_valid(email)) {
         return 'Invalid email';
     }
     return true;
-    };
+};
 
 /*-- Generate HMTL document and quit --*/
 const generateHTML = (fileName, data) => {
@@ -68,13 +76,14 @@ const anotherEmployeeOrCreateHTML = async() => {
         },
       ]);
     if(anotherEmployee.again) {
+        setConsole();
         getRole();
     } else {
         generateHTML(outputPath, employees)
     }
 };
 
-/*-- function creat new instance and add to employees array --*/
+/*-- function create new instance and add to employees array --*/
 const generateEmployee = (employee,response) => {
 
     switch (employee) {
@@ -151,7 +160,8 @@ const getUserInput = employee => {
             type: 'input',
             message: `What is their Office Number? `,
             name: 'officeNumber',
-            when: () => {return employee === 'manager'}
+            when: () => {return employee === 'manager'},
+            //validate: (officeNumber) => {return verifyOfficeNumber(officeNumber)}
         },
         {
             type: 'input',
@@ -179,8 +189,9 @@ const getUserInput = employee => {
 /*-- Initiate program --*/
 
 const init = () => {
+    setConsole();
     getRole();
-    
+      
 }
 
 init();

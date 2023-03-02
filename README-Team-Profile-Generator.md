@@ -82,6 +82,5 @@ Any question, get intouch:
   
 ## Screenshot
 
-  ![Team Member HTML]([./assets/MyTeam_.jpeg)
+  ![Team Member HTML](./assets/MyTeam_.jpeg)
 
-  

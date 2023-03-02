@@ -1,5 +1,5 @@
 # Team-Profile-Generator
-To Generate A Webpage That Displays A Teams Basic Info, So That A User Has Quick Access To Thier Emails And GitHub Profiles.
+To Generate A Webpage That Displays A Teams Basic Info, So That A User Has Quick Access To Their Emails And GitHub Profiles.
 
   ## Description
   This application that generates HTML files using input from a command-line interface. The application will take in information about employees on a software  engineering team, then generate an HTML webpage that displays summaries for each person. 
@@ -41,10 +41,10 @@ Follow the steps below to use this app:
 
   * Node Index.js 
   * Follow The Prompts, to create a Manager, Engineer or Intern, each has common ans individual properties 
-  * One you have entered the porpoerties, you can choose to enter another team member, or create the HTML document. 
+  * One you have entered the properties, you can choose to enter another team member, or create the HTML document. 
   * If you choose to create another member, follow the  steps above.
   * If you choose to end the program and create the HTML document, the code will create the document and present with pat to the document.
-  * Open the docuemnt in your browser to view.
+  * Open the document in your browser to view.
 
 
 ## Contributors 
